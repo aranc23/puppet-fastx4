@@ -4,10 +4,38 @@
 #
 # @param vardir
 #   directory for some configuration
+# @param localdir
+#   local version of vardir, presumably not automounted
+# @param configdir
+#   config file location, possibly a file share in a network cluster
+# @param packages
+#   packages to be installed
+# @param service_user
+#   config files owned by this user
+# @param service_group
+#   config file group
+# @param service_ensure
+#   passed to service def.
+# @param service_enabled
+#   passed to service definition
+# @param auth_oidc_config
+#   used to create the auth-oidc.ini file, which is not used without
+#   an "advanced" license"
+# @param loglevel_config
+#   used to create the loglevel.ini file
+# @param https_config
+#   used to create the https.ini file
+# @param permissions_config
+#   used to create the permissions.ini config, which I belive only
+#   sets the admin groups, which may or may not be used
+# @param fastx_env
+#   used to create fastx.env, environment variables that configure
+#   fastx4
 # @example
 #   include fastx4
 class fastx4 (
   Stdlib::Absolutepath $vardir = '/var/fastx',
+  Stdlib::Absolutepath $localdir = '/var/fastx-local',
   Stdlib::Absolutepath $configdir = '/etc/fastx',
   Variant[String,Array[String]] $packages = 'fastx4-server',
   String $service_user = 'fastx',
@@ -18,7 +46,11 @@ class fastx4 (
   Variant[Array[String],String] $services = 'fastx4',
   Variant[Enum['running','stopped'],Undef] $service_ensure = 'running',
   Boolean $service_enabled = true,
+  Hash[String,String] $auth_oidc_config = {},
   Hash[String,String] $loglevel_config = {'**' => 'info'},
+  Hash[String,String] $https_config = {},
+  Hash[String,String] $permissions_config = {},
+  Hash[String,Variant[String,Integer]] $fastx_env = {},
 ) {
   include stdlib
   contain fastx4::install
