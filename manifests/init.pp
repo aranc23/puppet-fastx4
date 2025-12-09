@@ -18,16 +18,8 @@
 #   passed to service def.
 # @param service_enabled
 #   passed to service definition
-# @param auth_oidc_config
-#   used to create the auth-oidc.ini file, which is not used without
-#   an "advanced" license"
-# @param loglevel_config
-#   used to create the loglevel.ini file
-# @param https_config
-#   used to create the https.ini file
-# @param permissions_config
-#   used to create the permissions.ini config, which I belive only
-#   sets the admin groups, which may or may not be used
+# @param config
+#   hash of filenames and parameters
 # @param fastx_env
 #   used to create fastx.env, environment variables that configure
 #   fastx4
@@ -46,10 +38,9 @@ class fastx4 (
   Variant[Array[String],String] $services = 'fastx4',
   Variant[Enum['running','stopped'],Undef] $service_ensure = 'running',
   Boolean $service_enabled = true,
-  Hash[String,String] $auth_oidc_config = {},
-  Hash[String,String] $loglevel_config = {'**' => 'info'},
-  Hash[String,String] $https_config = {},
-  Hash[String,String] $permissions_config = {},
+  Hash[String,Hash] $config = {
+    'loglevel' => {'**' => 'info'},
+  },
   Hash[String,Variant[String,Integer]] $fastx_env = {},
 ) {
   include stdlib

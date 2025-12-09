@@ -18,42 +18,20 @@ class fastx4::configure {
       match => "^${k}=",
     }
   }
-  ['auth-oidc', 'loglevel', 'https', 'permissions'].each |$f| {
-    file { "${fastx4::configdir}/${f}.ini":
+  $fastx4::config.each |$f, $config| {
+    $file_name = "${fastx4::configdir}/${f}.ini"
+    file { $file_name:
       replace => false,
       owner   => $fastx4::service_user,
       group   => $fastx4::service_group,
       mode    => '0644',
     }
-  }
-  $fastx4::auth_oidc_config.each |$k, $v| {
-    ini_setting { "auth-oidc.ini: ${k}: ${v}":
-      path    => "${fastx4::configdir}/auth-oidc.ini",
-      setting => $k,
-      value   => $v,
-    }
-  }
-  $fastx4::loglevel_config.each |$k, $v| {
-    ini_setting { "loglevel.ini: ${k}: ${v}":
-      path    => "${fastx4::configdir}/loglevel.ini",
-      setting => $k,
-      value   => $v,
-    }
-  }
-  $fastx4::https_config.each |$k, $v| {
-    ini_setting { "https.ini: ${k}: ${v}":
-      path    => "${fastx4::configdir}/https.ini",
-      #section => $section,
-      setting => $k,
-      value   => $v,
-    }
-  }
-  $fastx4::permissions_config.each |$k, $v| {
-    ini_setting { "permissions.ini: ${k}: ${v}":
-      path    => "${fastx4::configdir}/permissions.ini",
-      #section => $section,
-      setting => $k,
-      value   => $v,
+    $config.each |$k, $v| {
+      ini_setting { "${f}: ${k}: ${v}":
+        path    => $file_name,
+        setting => $k,
+        value   => $v,
+      }
     }
   }
   if $fastx4::license_server =~ Stdlib::Fqdn {
