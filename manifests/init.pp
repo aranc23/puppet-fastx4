@@ -42,6 +42,8 @@ class fastx4 (
     'loglevel' => {'**' => 'info'},
   },
   Hash[String,Variant[String,Integer]] $fastx_env = {},
+  Boolean $manage_repos = true,
+  Hash $yumrepos = {},
 ) {
   include stdlib
   contain fastx4::install

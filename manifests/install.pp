@@ -5,6 +5,13 @@
 # @example
 #   include fastx4::install
 class fastx4::install {
+  if $fastx4::manage_repos {
+    create_resources(
+      'yumrepo',
+      $fastx4::yumrepos,
+      { before => Package[$fastx4::packages] },
+    )
+  }
   package { $fastx4::packages:
     ensure => installed,
   }
