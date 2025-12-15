@@ -26,11 +26,10 @@ class fastx4::configure {
       group   => $fastx4::service_group,
       mode    => '0644',
     }
-    $config.each |$k, $v| {
-      ini_setting { "${f}: ${k}: ${v}":
-        path    => $file_name,
-        setting => $k,
-        value   => $v,
+    $config.each |$i| {
+      ini_setting { "set ${i} in ${f}":
+        path => $f,
+        *    => $i,
       }
     }
   }
