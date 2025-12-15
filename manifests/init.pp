@@ -38,8 +38,20 @@ class fastx4 (
   Variant[Array[String],String] $services = 'fastx4',
   Variant[Enum['running','stopped'],Undef] $service_ensure = 'running',
   Boolean $service_enabled = true,
-  Hash[String,Hash] $config = {
-    'loglevel' => {'**' => 'info'},
+  Hash[String,Array[Struct[
+    {
+      ensure  => Optional[Enum['present','absent']],
+      section => Optional[String],
+      setting => String,
+      value => Variant[String,Integer,Float],
+    }
+  ]]] $config = {
+    'loglevel' => [
+      {
+        'setting' => '**',
+        'value'   => 'info',
+      }
+    ],
   },
   Hash[String,Variant[String,Integer]] $fastx_env = {},
   Boolean $manage_repos = true,
