@@ -10,6 +10,7 @@ class fastx4::configure {
     owner   => $fastx4::service_user,
     group   => $fastx4::service_group,
     mode    => '0600',
+    content => "# managed by puppet\n",
   }
   $fastx4::fastx_env.each |$k, $v| {
     file_line { "fast.env: ${k}=${v}":
