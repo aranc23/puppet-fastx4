@@ -30,8 +30,9 @@ class fastx4::configure {
     }
     $config.each |$i| {
       ini_setting { "set ${i['setting']} in ${file_name}":
-        path => $file_name,
-        *    => $i,
+        key_val_separator => '=',
+        path              => $file_name,
+        *                 => $i,
       }
     }
   }
