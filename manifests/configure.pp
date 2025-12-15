@@ -27,7 +27,7 @@ class fastx4::configure {
       mode    => '0644',
     }
     $config.each |$i| {
-      ini_setting { "set ${i} in ${f}":
+      ini_setting { "set ${i['setting']} in ${f}":
         path => $f,
         *    => $i,
       }
