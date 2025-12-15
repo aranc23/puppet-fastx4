@@ -43,7 +43,7 @@ class fastx4 (
       ensure  => Optional[Enum['present','absent']],
       section => Optional[String],
       setting => String,
-      value => Variant[String,Integer,Float],
+      value   => Variant[String,Integer,Float],
     }
   ]]] $config = {
     'loglevel' => [
