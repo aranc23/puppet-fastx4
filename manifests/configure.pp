@@ -13,9 +13,10 @@ class fastx4::configure {
   }
   $fastx4::fastx_env.each |$k, $v| {
     file_line { "fast.env: ${k}=${v}":
-      path  => "${fastx4::configdir}/fastx.env",
-      line  => "${k}=${v}",
-      match => "^${k}=",
+      path    => "${fastx4::configdir}/fastx.env",
+      line    => "${k}=${v}",
+      match   => "^${k}=",
+      require => File["${fastx4::configdir}/fastx.env"],
     }
   }
   $fastx4::config.each |$f, $config| {
