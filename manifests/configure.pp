@@ -37,6 +37,12 @@ class fastx4::configure {
     }
   }
   if $fastx4::license_server =~ Stdlib::Fqdn {
+    file { $fastx4::licensedir:
+      ensure => directory,
+      owner  => $fastx4::service_user,
+      group  => $fastx4::service_group,
+      mode   => '0775',
+    }
     file { $fastx4::license_file:
       owner   => $fastx4::service_user,
       group   => $fastx4::service_group,
