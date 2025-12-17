@@ -4,7 +4,7 @@
 class fastx4::users {
   if ($fastx4::manage_service_user) {
     group { $fastx4::service_group:
-      gid    => $fast4::service_gid,
+      gid    => $fastx4::service_gid,
       ensure => present,
     }
     -> user { $fastx4::service_user:
