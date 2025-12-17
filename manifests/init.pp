@@ -30,8 +30,12 @@ class fastx4 (
   Stdlib::Absolutepath $localdir = '/var/fastx-local',
   Stdlib::Absolutepath $configdir = '/etc/fastx',
   Variant[String,Array[String]] $packages = 'fastx4-server',
+  Boolean $manage_service_user = false,
   String $service_user = 'fastx',
   String $service_group = 'fastx',
+  Integer $service_gid = 796,
+  Integer $service_uid = 796,
+  Stdlib::Absolutepath $service_user_home_directory = $fastx4::localdir,
   Optional[Stdlib::Fqdn] $license_server = undef,
   Stdlib::Absolutepath $licensedir = "${fastx4::vardir}/license",
   Stdlib::Absolutepath $license_file = "${fastx4::licensedir}/license_server.lic",
@@ -58,10 +62,12 @@ class fastx4 (
   Hash $yumrepos = {},
 ) {
   include stdlib
+  contain fastx4::users
   contain fastx4::install
   contain fastx4::configure
   contain fastx4::service
-  Class['fastx4::install']
+  Class['::fastx3::users']
+  -> Class['fastx4::install']
   -> Class['fastx4::configure']
   ~> Class['fastx4::service']
 }
