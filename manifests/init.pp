@@ -66,7 +66,7 @@ class fastx4 (
   contain fastx4::install
   contain fastx4::configure
   contain fastx4::service
-  Class['::fastx3::users']
+  Class['::fastx4::users']
   -> Class['fastx4::install']
   -> Class['fastx4::configure']
   ~> Class['fastx4::service']
