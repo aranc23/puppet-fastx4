@@ -44,6 +44,30 @@ class fastx4::configure {
       }
     }
   }
+  if $fastx4::apps {
+    file { "${fastx4::configdir}/apps":
+      ensure => directory,
+      owner   => $fastx4::service_user,
+      group   => $fastx4::service_group,
+      mode    => '0755',
+    }
+    $fastx4::apps.each |$f, $config| {
+      $file_name = "${fastx4::configdir}/apps/${f}.ini"
+      file { $file_name:
+        replace => false,
+        owner   => $fastx4::service_user,
+        group   => $fastx4::service_group,
+        mode    => '0664',
+      }
+      $config.each |$i| {
+        ini_setting { "set ${i['setting']} in ${file_name}":
+          key_val_separator => '=',
+          path              => $file_name,
+          *                 => $i,
+        }
+      }
+    }
+  }
   if $fastx4::license_server =~ Stdlib::Fqdn {
     file { $fastx4::licensedir:
       ensure => directory,

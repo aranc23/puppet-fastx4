@@ -58,6 +58,14 @@ class fastx4 (
       }
     ],
   },
+  Optional[Hash[String,Array[Struct[
+    {
+      ensure  => Optional[Enum['present','absent']],
+      section => Optional[String],
+      setting => String,
+      value   => Variant[String,Integer,Float],
+    }
+  ]]]] $apps = undef,
   Hash[String,Variant[String,Integer]] $fastx_env = {},
   Boolean $manage_repos = true,
   Hash $yumrepos = {},
