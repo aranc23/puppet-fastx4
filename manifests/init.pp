@@ -29,6 +29,7 @@ class fastx4 (
   Stdlib::Absolutepath $vardir = '/var/fastx',
   Stdlib::Absolutepath $localdir = '/var/fastx-local',
   Stdlib::Absolutepath $configdir = '/etc/fastx',
+  Boolean $manage_configdir = true,
   Variant[String,Array[String]] $packages = 'fastx4-server',
   Boolean $manage_service_user = false,
   String $service_user = 'fastx',

@@ -5,6 +5,14 @@
 # @example
 #   include fastx4::configure
 class fastx4::configure {
+  if $fastx4::manage_configdir {
+    file { $fastx4::configdir:
+      ensure => directory,
+      owner  => $fastx4::service_user,
+      group  => $fastx4::service_group,
+      mode   => '0770',
+    }
+  }
   file { "${fastx4::configdir}/fastx.env":
     replace => false,
     owner   => $fastx4::service_user,
