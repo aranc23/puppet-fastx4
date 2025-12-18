@@ -57,7 +57,7 @@ class fastx4::configure {
         replace => false,
         owner   => $fastx4::service_user,
         group   => $fastx4::service_group,
-        mode    => '0664',
+        mode    => '0644',
       }
       $config.each |$i| {
         ini_setting { "set ${i['setting']} in ${file_name}":
