@@ -20,11 +20,12 @@ class fastx4::configure {
     mode    => '0600',
     content => "# managed by puppet\n",
   }
-  $fastx4::fastx_env.each |$k, $v| {
-    file_line { "fast.env: ${k}=${v}":
+  $fastx4::fastx_env.each |$e| {
+    file_line { "fast.env: ${e['setting']}=${e['value']}":
+      ensure  => $e['ensure'],
       path    => "${fastx4::configdir}/fastx.env",
-      line    => "${k}=${v}",
-      match   => "^${k}=",
+      line    => "${e['setting']}=${e['value']}",
+      match   => "^${e['setting']}=",
       require => File["${fastx4::configdir}/fastx.env"],
     }
   }
