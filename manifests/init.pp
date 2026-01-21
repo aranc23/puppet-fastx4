@@ -66,10 +66,9 @@ class fastx4 (
       value   => Variant[String,Integer,Float],
     }
   ]]]] $apps = undef,
-  Optional[Array[Struct[
+  Optional[Hash[String,Struct[
     {
       ensure  => Optional[Enum['present','absent']],
-      setting => String,
       value   => Variant[String,Integer,Float],
     }
   ]]] $fastx_env = [],
