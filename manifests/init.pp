@@ -71,7 +71,7 @@ class fastx4 (
       ensure  => Optional[Enum['present','absent']],
       value   => Variant[String,Integer,Float],
     }
-  ]]] $fastx_env = [],
+  ]]] $fastx_env = {},
   Boolean $manage_repos = true,
   Hash $yumrepos = {},
 ) {
