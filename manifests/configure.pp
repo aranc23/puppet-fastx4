@@ -48,9 +48,9 @@ class fastx4::configure {
   if $fastx4::apps {
     file { "${fastx4::configdir}/apps":
       ensure => directory,
-      owner   => $fastx4::service_user,
-      group   => $fastx4::service_group,
-      mode    => '0755',
+      owner  => $fastx4::service_user,
+      group  => $fastx4::service_group,
+      mode   => '0755',
     }
     $fastx4::apps.each |$f, $config| {
       $file_name = "${fastx4::configdir}/apps/${f}.ini"
