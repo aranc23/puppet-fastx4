@@ -1,0 +1,15 @@
+---
+fastx4::apps:
+  xfce4:
+    - setting: command
+      value: "test -x /bin/vglrun && vglrun -c proxy startxfce4 || startxfce4"
+    - setting: geometry
+      value: ''
+    - setting: icon
+      value: xfce.png
+    - setting: name
+      value: 'XFCE'
+    - setting: startDbus
+      value: 'true'
+    - setting: strict
+      value: 'true'

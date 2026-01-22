@@ -1,1 +1,30 @@
---- {}
+---
+
+lookup_options:
+  fastx4::apps:
+    merge:
+      strategy: deep
+      knockout_prefix: '--'
+      merge_hash_arrays: true
+
+fastx4::apps:
+  mate:
+    - setting: command
+      value: "test -x /bin/vglrun && vglrun -c proxy mate-session || mate-session"
+    - setting: geometry
+      value: ''
+    - setting: icon
+      value: mate-desktop.png
+    - setting: name
+      value: MATE
+    - setting: strict
+      value: 'true'
+  xterm:
+    - setting: command
+      value: "test -x /bin/vglrun && vglrun -c proxy xterm -ls || xterm -ls"
+    - setting: geometry
+      value: rootless
+    - setting: icon
+      value: terminal.png
+    - setting: name
+      value: xterm
