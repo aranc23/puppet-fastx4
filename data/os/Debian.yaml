@@ -1,5 +1,2 @@
 ---
 fastx4::manage_repos: false
-fastx4::packages:
-  - nodejs
-  - fastx4-server
