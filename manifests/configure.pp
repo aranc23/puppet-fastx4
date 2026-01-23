@@ -83,4 +83,16 @@ class fastx4::configure {
       content => "HOST ${fastx4::license_server} 00000000 5053\n",
     }
   }
+  file { "${fastx4::configdir}/announcements.html":
+    owner   => $fastx4::service_user,
+    group   => $fastx4::service_group,
+    mode    => '0644',
+    content => $fastx4::announcements,
+  }
+  file { "${fastx4::configdir}/motd.html":
+    owner   => $fastx4::service_user,
+    group   => $fastx4::service_group,
+    mode    => '0644',
+    content => $fastx4::motd,
+  }
 }

@@ -74,6 +74,8 @@ class fastx4 (
   ]]] $fastx_env = {},
   Boolean $manage_repos = true,
   Hash $yumrepos = {},
+  Optional[String] $announcements = undef,
+  Optional[String] $motd = undef,
 ) {
   include stdlib
   contain fastx4::users
